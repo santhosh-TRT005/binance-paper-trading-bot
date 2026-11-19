@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: xau-vwap-demo-bot
+    runtime: docker
+    region: singapore
+    plan: 0.5c-512mb
+    numInstances: 1
+    healthCheckPath: /healthz
+    disk:
+      name: xau-vwap-bot-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: APP_PASSWORD
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: APP_ENCRYPTION_KEY
+        generateValue: true
+      - key: BOT_DATA_DIR
+        value: /var/data
+      - key: COOKIE_SECURE
+        value: "1"
